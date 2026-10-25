@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кофейный котик — уютная кофейня с характером</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ====== RESET & BASE ====== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: #3e2723;
+    background: #fff8f0;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+
+  :root {
+    --cream: #fff8f0;
+    --beige: #f5e6d3;
+    --caramel: #d4a574;
+    --coffee: #8b5a3c;
+    --dark-coffee: #3e2723;
+    --accent: #e07a3c;
+    --gold: #c9962b;
+    --shadow: 0 10px 30px rgba(62, 39, 35, 0.12);
+    --shadow-lg: 0 20px 50px rgba(62, 39, 35, 0.18);
+  }
+
+  h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--dark-coffee); }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section { padding: 100px 0; }
+
+  .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .section-subtitle {
+    text-align: center;
+    color: var(--coffee);
+    font-size: 1.05rem;
+    max-width: 640px;
+    margin: 0 auto 60px;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--caramel), var(--accent));
+    margin: 16px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ====== HEADER ====== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(255, 248, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+  }
+  header.scrolled {
+    box-shadow: 0 4px 20px rgba(62, 39, 35, 0.08);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.3s ease;
+  }
+  .logo:hover { transform: scale(1.04); }
+  .logo-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.55rem;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 14px rgba(224, 122, 60, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+  }
+  .logo-badge::after {
+    content: '♨';
+    position: absolute;
+    top: -8px; right: -6px;
+    font-size: 0.9rem;
+    color: var(--accent);
+    animation: steam 2s ease-in-out infinite;
+    text-shadow: 0 2px 4px rgba(224, 122, 60, 0.3);
+  }
+  @keyframes steam {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(-4px); opacity: 1; }
+  }
+  .logo:hover .logo-badge {
+    transform: rotate(-10deg) scale(1.08);
+    box-shadow: 0 6px 20px rgba(224, 122, 60, 0.55);
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .logo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--dark-coffee) 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .logo-tagline {
+    font-size: 0.56rem;
+    letter-spacing: 2.6px;
+    text-transform: uppercase;
+    color: var(--coffee);
+    font-weight: 600;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--dark-coffee);
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.3s ease;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+  }
+  .burger span {
+    width: 26px;
+    height: 3px;
+    background: var(--dark-coffee);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .burger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .burger.active span:nth-child(2) { opacity: 0; }
+  .burger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ====== HERO ====== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background:
+      radial-gradient(ellipse at top left, rgba(212, 165, 116, 0.4), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(224, 122, 60, 0.25), transparent 50%),
+      linear-gradient(135deg, #fff8f0 0%, #f5e6d3 100%);
+    overflow: hidden;
+    padding-top: 100px;
+  }
+  .hero::before {
+    content: '☕';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.05;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, -55%); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 24px;
+    animation: fadeUp 1s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--caramel);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--coffee);
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--dark-coffee) 0%, var(--coffee) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero h1 span {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--coffee);
+    margin-bottom: 40px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, var(--accent), var(--coffee));
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(224, 122, 60, 0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+  }
+  .btn:hover::before { left: 100%; }
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(224, 122, 60, 0.45);
+  }
+  .btn:active { transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--dark-coffee);
+    border: 2px solid var(--dark-coffee);
+    box-shadow: none;
+    margin-left: 12px;
+  }
+  .btn-outline:hover {
+    background: var(--dark-coffee);
+    color: #fff;
+  }
+
+  /* ====== ABOUT ====== */
+  .about {
+    background: var(--cream);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-image {
+    position: relative;
+    height: 480px;
+    border-radius: 24px;
+    background:
+      linear-gradient(135deg, rgba(139, 90, 60, 0.1), rgba(212, 165, 116, 0.3)),
+      radial-gradient(circle at 30% 30%, #d4a574, #8b5a3c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .about-image::before {
+    content: '🐱';
+    font-size: 12rem;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+    animation: float 4s ease-in-out infinite;
+  }
+  .about-image::after {
+    content: '☕';
+    position: absolute;
+    bottom: 30px; right: 30px;
+    font-size: 5rem;
+    opacity: 0.6;
+  }
+
+  .about-text h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 24px;
+  }
+  .about-text p {
+    color: var(--coffee);
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+  }
+  .about-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1;
+    min-width: 120px;
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--coffee);
+    margin-top: 4px;
+  }
+
+  /* ====== MENU ====== */
+  .menu {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--beige) 100%);
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+  .menu-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--caramel), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .menu-card:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-lg);
+  }
+  .menu-card:hover::before { transform: scaleX(1); }
+
+  .menu-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+    display: inline-block;
+    transition: transform 0.4s ease;
+  }
+  .menu-card:hover .menu-icon {
+    transform: scale(1.15) rotate(-8deg);
+  }
+  .menu-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 10px;
+  }
+  .menu-card .description {
+    color: var(--coffee);
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+    min-height: 44px;
+  }
+  .menu-card .price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .menu-card .price small {
+    font-size: 0.9rem;
+    color: var(--coffee);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+  }
+
+  /* ====== PROMOTIONS ====== */
+  .promos {
+    background: var(--cream);
+  }
+  .promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+  .promo-card {
+    position: relative;
+    padding: 40px 32px;
+    border-radius: 24px;
+    color: #fff;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .promo-card:nth-child(1) {
+    background: linear-gradient(135deg, #e07a3c, #c9962b);
+  }
+  .promo-card:nth-child(2) {
+    background: linear-gradient(135deg, #8b5a3c, #3e2723);
+  }
+  .promo-card:nth-child(3) {
+    background: linear-gradient(135deg, #d4a574, #8b5a3c);
+  }
+  .promo-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+    transition: transform 0.6s ease;
+  }
+  .promo-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+  .promo-card:hover::before {
+    transform: translate(-20%, 20%) scale(1.1);
+  }
+  .promo-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .promo-card h3 {
+    color: #fff;
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .promo-card p {
+    font-size: 1rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 2;
+  }
+  .promo-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 16px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ====== BONUS ====== */
+  .bonus {
+    background: linear-gradient(135deg, var(--beige) 0%, var(--cream) 100%);
+  }
+  .bonus-wrapper {
+    background: #fff;
+    border-radius: 28px;
+    padding: 60px 40px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .bonus-wrapper::before {
+    content: '🐾';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.04;
+    top: -40px; right: -40px;
+    transform: rotate(-20deg);
+  }
+
+  .bonus-intro {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 50px;
+  }
+  .bonus-intro h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+  .bonus-intro p {
+    color: var(--coffee);
+    font-size: 1.05rem;
+  }
+
+  .levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .level {
+    background: linear-gradient(135deg, #fff 0%, var(--beige) 100%);
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .level:hover {
+    transform: translateY(-6px);
+    border-color: var(--caramel);
+    box-shadow: var(--shadow);
+  }
+  .level-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 12px;
+  }
+  .level h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .level .threshold {
+    font-size: 0.85rem;
+    color: var(--coffee);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .level .bonus-info {
+    font-size: 0.95rem;
+    color: var(--dark-coffee);
+    line-height: 1.5;
+  }
+  .level .bonus-info strong {
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+
+  .bonus-rules {
+    background: var(--beige);
+    border-radius: 16px;
+    padding: 28px 32px;
+  }
+  .bonus-rules h3 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .bonus-rules ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px 24px;
+  }
+  .bonus-rules li {
+    padding-left: 28px;
+    position: relative;
+    color: var(--coffee);
+    font-size: 0.95rem;
+  }
+  .bonus-rules li::before {
+    content: '🐾';
+    position: absolute;
+    left: 0; top: 0;
+    font-size: 1rem;
+  }
+
+  /* ====== CONTACTS ====== */
+  .contacts {
+    background: var(--dark-coffee);
+    color: var(--cream);
+  }
+  .contacts .section-title { color: var(--cream); }
+  .contacts .section-subtitle { color: var(--caramel); }
+  .contacts .section-title::after {
+    background: linear-gradient(90deg, var(--caramel), var(--accent));
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
+  .contact-card {
+    background: rgba(255, 248, 240, 0.06);
+    border: 1px solid rgba(212, 165, 116, 0.2);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  .contact-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 248, 240, 0.1);
+    border-color: var(--caramel);
+  }
+  .contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+  .contact-card h3 {
+    color: var(--cream);
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+  }
+  .contact-card p, .contact-card a {
+    color: var(--caramel);
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+  .contact-card a:hover { color: var(--accent); }
+
+  .map-placeholder {
+    margin-top: 50px;
+    height: 300px;
+    border-radius: 20px;
+    background:
+      linear-gradient(135deg, rgba(139, 90, 60, 0.3), rgba(62, 39, 35, 0.5)),
+      repeating-linear-gradient(45deg, rgba(212, 165, 116, 0.1) 0 20px, transparent 20px 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid rgba(212, 165, 116, 0.3);
+  }
+  .map-placeholder .pin {
+    font-size: 4rem;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  .map-placeholder p {
+    color: var(--caramel);
+    font-size: 1rem;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: #2a1810;
+    color: var(--caramel);
+    text-align: center;
+    padding: 30px 24px;
+    font-size: 0.9rem;
+  }
+  footer .socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  footer .socials a {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(212, 165, 116, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212, 165, 116, 0.2);
+  }
+  footer .socials a:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-4px);
+  }
+
+  /* ====== SCROLL ANIMATIONS ====== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    section { padding: 70px 0; }
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about-image { height: 360px; }
+    .about-image::before { font-size: 9rem; }
+    .bonus-wrapper { padding: 40px 24px; }
+  }
+
+  @media (max-width: 768px) {
+    .burger { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: var(--cream);
+      flex-direction: column;
+      gap: 0;
+      padding: 20px 0;
+      box-shadow: 0 10px 30px rgba(62, 39, 35, 0.1);
+      transform: translateY(-150%);
+      transition: transform 0.4s ease;
+      border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+    }
+    .nav-links.open { transform: translateY(0); }
+    .nav-links li { width: 100%; text-align: center; }
+    .nav-links a {
+      display: block;
+      padding: 16px;
+      border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+    }
+    .nav-links a::after { display: none; }
+
+    .hero { padding-top: 120px; min-height: 90vh; }
+    .hero::before { font-size: 14rem; }
+    .btn-outline { margin-left: 0; margin-top: 12px; }
+    .hero .btn-wrap { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+
+    .about-stats { gap: 20px; }
+    .stat-number { font-size: 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 60px 0; }
+    .container { padding: 0 18px; }
+    .menu-card { padding: 28px 20px; }
+    .promo-card { padding: 32px 24px; min-height: 240px; }
+    .bonus-rules { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header id="header">
+  <nav class="nav">
+    <a href="#home" class="logo">
+      <span class="logo-badge">🐱</span>
+      <span class="logo-text">
+        <span class="logo-name">Кофейный котик</span>
+        <span class="logo-tagline">кофейня с характером</span>
+      </span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Главная</a></li>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#menu">Меню</a></li>
+      <li><a href="#promos">Акции</a></li>
+      <li><a href="#bonus">Бонусы</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-badge">🐾 Уют с 2015 года</span>
+    <h1>Кофе, который <span>мурлычет</span><br>от удовольствия</h1>
+    <p>Авторские напитки, свежая обжарка и атмосфера, в которой хочется остаться. Загляните к нам — и ваш день станет чуточку теплее.</p>
+    <div class="btn-wrap">
+      <a href="#menu" class="btn">Посмотреть меню</a>
+      <a href="#contacts" class="btn btn-outline">Как нас найти</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image reveal"></div>
+      <div class="about-text reveal">
+        <h2>Наша история</h2>
+        <p>«Кофейный котик» появился в 2015 году как маленькая кофейня на углу тихой улицы. Основатели — Анна и Михаил — мечтали создать место, где каждый гость чувствует себя как дома, а каждая чашка кофе — как тёплое объятие.</p>
+        <p>Сегодня у нас три уютные точки в городе, собственная обжарка и команда бариста, которые знают ваше имя и любимый напиток. Но главное осталось прежним — любовь к кофе, котикам и людям.</p>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">лет с вами</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">50k</div>
+            <div class="stat-label">чашек в месяц</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">3</div>
+            <div class="stat-label">уютные точки</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== MENU ====== -->
+<section class="menu" id="menu">
+  <div class="container">
+    <h2 class="section-title reveal">Наши фирменные напитки</h2>
+    <p class="section-subtitle reveal">Каждый рецепт — результат долгих экспериментов и любви к деталям. Попробуйте то, чего нет больше нигде.</p>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <div class="menu-icon">☕</div>
+        <h3>Кот-капучино</h3>
+        <p class="description">Классика с нежной молочной пенкой и фирменным латте-артом в виде кошачьей мордочки</p>
+        <div class="price">220 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🥛</div>
+        <h3>Мур-р-рочино</h3>
+        <p class="description">Воздушный латте с карамельным сиропом и щепоткой корицы — мурчит сам по себе</p>
+        <div class="price">260 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🍯</div>
+        <h3>Бархатные лапки</h3>
+        <p class="description">Нежный раф на сливках с мёдом, лавандой и ванилью — вкус мягких кошачьих подушечек</p>
+        <div class="price">290 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🔥</div>
+        <h3>Рыжий хвостик</h3>
+        <p class="description">Крепкий двойной эспрессо из зёрен светлой обжарки с цитрусовыми нотами</p>
+        <div class="price">180 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🍫</div>
+        <h3>Шоколадный носик</h3>
+        <p class="description">Бархатный мокко с бельгийским шоколадом, морской солью и взбитыми сливками</p>
+        <div class="price">310 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🧊</div>
+        <h3>Снежный кот</h3>
+        <p class="description">Освежающий айс-латте с кокосовым молоком и сиропом из белой малины</p>
+        <div class="price">280 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🌿</div>
+        <h3>Мята-мурлыка</h3>
+        <p class="description">Матча-латте на рисовом молоке с мятой и лаймом — свежесть, которая мурлычет</p>
+        <div class="price">300 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🐾</div>
+        <h3>Кот в сапогах-латте</h3>
+        <p class="description">Пряный чай-латте на куркуме с имбирём и кленовым сиропом — тёплые нотки приключений</p>
+        <div class="price">270 <small>₽</small></div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-icon">🍒</div>
+        <h3>Вишнёвый ус</h3>
+        <p class="description">Флэт уайт с вишнёвым конфитюром и миндальным молоком — бархат и ягодная кислинка</p>
+        <div class="price">320 <small>₽</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROMOS ====== -->
+<section class="promos" id="promos">
+  <div class="container">
+    <h2 class="section-title reveal">Акции и спецпредложения</h2>
+    <p class="section-subtitle reveal">Приятные бонусы для тех, кто ценит вкусный кофе и хорошее настроение</p>
+    <div class="promo-grid">
+      <div class="promo-card reveal">
+        <div class="promo-emoji">🕐</div>
+        <h3>Счастливые часы</h3>
+        <p>Скидка 20% на все напитки с понедельника по пятницу с 14:00 до 16:00. Идеальный повод для послеобеденного перерыва.</p>
+        <span class="promo-badge">Ежедневно 14:00 – 16:00</span>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-emoji">🍰</div>
+        <h3>Кофе + десерт</h3>
+        <p>Закажите любой напиток и десерт из нашей витрины — и получите скидку 15% на весь чек. Вкусное сочетание!</p>
+        <span class="promo-badge">Постоянная акция</span>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-emoji">🎁</div>
+        <h3>Шестой кофе в подарок</h3>
+        <p>Копите штампы на карте лояльности: после 5 покупок 6-й напиток любого объёма — за наш счёт.</p>
+        <span class="promo-badge">Для участников программы</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== BONUS ====== -->
+<section class="bonus" id="bonus">
+  <div class="container">
+    <div class="bonus-wrapper reveal">
+      <div class="bonus-intro">
+        <h2>Бонусная программа «Котомания»</h2>
+        <p>Копите баллы за каждую покупку, получайте подарки на день рождения и открывайте новые уровни вместе с нами.</p>
+      </div>
+
+      <div class="levels">
+        <div class="level">
+          <div class="level-emoji">🐱</div>
+          <h3>Котёнок</h3>
+          <div class="threshold">Стартовый уровень</div>
+          <div class="bonus-info">
+            <strong>5%</strong> баллами с каждой покупки
+          </div>
+        </div>
+        <div class="level">
+          <div class="level-emoji">😺</div>
+          <h3>Котик</h3>
+          <div class="threshold">от 3 000 ₽ покупок</div>
+          <div class="bonus-info">
+            <strong>7%</strong> баллами + подарок в день рождения
+          </div>
+        </div>
+        <div class="level">
+          <div class="level-emoji">🦁</div>
+          <h3>Котище</h3>
+          <div class="threshold">от 10 000 ₽ покупок</div>
+          <div class="bonus-info">
+            <strong>10%</strong> баллами + приоритетное обслуживание
+          </div>
+        </div>
+      </div>
+
+      <div class="bonus-rules">
+        <h3>Как это работает?</h3>
+        <ul>
+          <li>1 балл = 1 рубль при оплате</li>
+          <li>Можно оплатить до 30% заказа баллами</li>
+          <li>Баллы начисляются в течение 24 часов</li>
+          <li>Бонусы действуют 12 месяцев с момента начисления</li>
+          <li>Подарок на день рождения — 500 баллов</li>
+          <li>Регистрация бесплатная — через приложение или на кассе</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACTS ====== -->
+<section class="contacts" id="contacts">
+  <div class="container">
+    <h2 class="section-title reveal">Приходите в гости</h2>
+    <p class="section-subtitle reveal">Мы всегда рады видеть вас — с книгой, ноутбуком или просто за чашкой ароматного кофе</p>
+
+    <div class="contacts-grid">
+      <div class="contact-card reveal">
+        <div class="contact-icon">📍</div>
+        <h3>Адрес</h3>
+        <p>г. Москва,<br>ул. Кошачья, д. 12<br>м. Чистые пруды, 3 мин.</p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">🕒</div>
+        <h3>Часы работы</h3>
+        <p>Пн – Пт: 08:00 – 22:00<br>Сб – Вс: 09:00 – 23:00<br>Без выходных и праздников</p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">📞</div>
+        <h3>Контакты</h3>
+        <p>
+          <a href="tel:+74951234567">+7 (495) 123-45-67</a><br>
+          <a href="mailto:meow@coffeecat.ru">meow@coffeecat.ru</a>
+        </p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">🐾</div>
+        <h3>Мы в соцсетях</h3>
+        <p>
+          <a href="#">Instagram</a><br>
+          <a href="#">Telegram</a><br>
+          <a href="#">VK</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="map-placeholder reveal">
+      <div class="pin">📍</div>
+      <p>Здесь будет карта — мы ждём вас по адресу ул. Кошачья, 12</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="socials">
+    <a href="#" aria-label="Instagram">📷</a>
+    <a href="#" aria-label="Telegram">✈️</a>
+    <a href="#" aria-label="VK">💬</a>
+    <a href="#" aria-label="WhatsApp">📱</a>
+  </div>
+  <p>© 2015–2026 Кофейный котик. Сварено с любовью 🐾</p>
+</footer>
+
+<script>
+  // Sticky header effect
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+
+  // Burger menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // Scroll reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
